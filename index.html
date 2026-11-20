@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嫌がらせ DEATH NOTE</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- jQuery本体を先に読み込み、次に自分で書いたscript.jsを読み込む -->
+    <!-- jquery.min.jsは外部ライブラリなので、中身を書き換えない -->
+    <script src="jquery.min.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- 1920×1280 の座標で配置し、画面に合わせて比率を保ったまま縮小 -->
+    <main class="app-shell" id="app-shell">
+        <div class="app-stage" id="app-stage">
+            <!-- 01 表紙画面 -->
+            <section class="scene" id="cover-scene" aria-label="表紙画面">
+                <img class="background" src="assets/back-1.png" alt="嫌がらせ DEATH NOTE の表紙">
+                <button class="image-button open-button" id="open-button" type="button" aria-label="ノートを開く">
+                    <img src="assets/button-1.png" alt="">
+                </button>
+            </section>
+
+            <!-- 02 見開き画面。すでに印刷されているロゴや線は背景画像を使用 -->
+            <section class="scene is-hidden" id="book-scene" aria-label="ノートの記入画面">
+                <img class="background" src="assets/back-2.png" alt="開いたノート">
+                <!-- 左ページ：入力欄 -->
+                <form id="entry-form" class="entry-form" novalidate>
+                    <div class="field-row name-row">
+                        <label class="ink-label" for="name-input">名前</label>
+                        <input class="paper-field" id="name-input" type="text" maxlength="15" autocomplete="off" aria-label="名前">
+                    </div>
+                    <div class="field-row date-row">
+                        <label class="ink-label" for="date-input">日付</label>
+                        <input class="paper-field" id="date-input" type="date" aria-label="日付">
+                    </div>
+                    <label class="ink-label reason-label" for="reason-input">嫌因</label>
+                    <textarea class="paper-field reason-field" id="reason-input" maxlength="50" aria-label="嫌因"></textarea>
+                    <button class="image-button write-button" id="write-button" type="submit" aria-label="記す">
+                        <img src="assets/button-2.png" alt="">
+                    </button>
+                    <button class="image-button tear-button" id="tear-button" type="button" aria-label="破り捨てる">
+                        <img src="assets/button-3.png" alt="">
+                    </button>
+                </form>
+
+                <!-- 右ページ：記録の表示。ここには紙画像を通常時は重ねない -->
+                <div class="records" id="records" aria-live="polite"></div>
+
+                <!-- 破棄するときだけ右ページの透過PNGと記録を一緒に動かす -->
+                <div class="tear-layer" id="tear-layer" aria-hidden="true">
+                    <img src="assets/page-1.png" class="tear-paper" alt="">
+                    <div class="tear-records" id="tear-records"></div>
+                </div>
+
+                <!-- ページ操作は破棄する紙の外側に固定 -->
+                <button class="image-button previous-button" id="previous-button" type="button" aria-label="左へめくる">
+                    <img src="assets/button-4.png" alt="">
+                </button>
+                <button class="image-button next-button" id="next-button" type="button" aria-label="右へめくる">
+                    <img src="assets/button-5.png" alt="">
+                </button>
+                <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+            </section>
+
+            <!-- 表紙から見開きへのブラックアウト：0.5秒×2 -->
+            <div class="blackout" id="blackout" aria-hidden="true"></div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,418 @@
+/* ==========================================================
+01 共通画面：1920×1280を最大800px幅に縮小
+========================================================== */
+* {
+    box-sizing: border-box;
+}
+html {
+    min-height: 100%;
+}
+body {
+    min-height: 100%;
+}
+body {
+    margin: 0;
+    background: #1a100d;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+}
+.app-shell {
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 3 / 2;
+    margin: 20px auto;
+    overflow: hidden;
+    position: relative;
+}
+.app-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1280px;
+    transform-origin: left top;
+    overflow: hidden;
+}
+.scene {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.scene.is-hidden {
+    display: none;
+}
+.background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 1920px;
+    height: 1280px;
+    pointer-events: none;
+    user-select: none;
+}
+/* ==========================================================
+02 ボタン共通：影は画像ではなくCSS
+========================================================== */
+.image-button {
+    position: absolute;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    z-index: 12;
+    filter: drop-shadow(5px 6px 4px rgba(0, 0, 0, 0.35));
+    transition-property: filter, transform;
+    transition-duration: 0.15s, 0.12s;
+    transition-timing-function: ease, ease;
+}
+.image-button img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    pointer-events: none;
+    user-select: none;
+}
+.image-button:hover {
+    filter: brightness(1.2) contrast(0.9) drop-shadow(5px 6px 4px rgba(0, 0, 0, 0.35));
+}
+.image-button:active {
+    transform: scale(0.95);
+}
+.image-button:disabled {
+    cursor: default;
+}
+.image-button:disabled:active {
+    transform: none;
+}
+.open-button {
+    left: 270px;
+    top: 750px;
+    width: 510px;
+    height: 170px;
+}
+/* ==========================================================
+03 左ページ：入力欄と見出しを装飾線に合わせて配置
+========================================================== */
+.entry-form {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+}
+.entry-form > * {
+    pointer-events: auto;
+}
+.field-row {
+    position: absolute;
+    left: 264px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    width: 630px;
+    height: 76px;
+}
+.name-row {
+    top: 341px;
+}
+.date-row {
+    top: 451px;
+}
+.ink-label {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    flex: 0 0 125px;
+    height: 55px;
+    color: #f7eddf;
+    background: rgba(14, 6, 1, 0.65);
+    font-size: 30px;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);
+    letter-spacing: .08em;
+    line-height: 1;
+    clip-path: polygon(5% 0%, 94% 2%, 99% 16%, 94% 31%, 100% 51%, 95% 76%, 100% 98%, 4% 99%, 0 85%, 4% 66%, 0 46%, 5% 23%);
+}
+.paper-field {
+    border: 2px solid #412719;
+    border-radius: 2px;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    color: #24150e;
+    font-size: 37px;
+    background: rgba(255, 239, 209, 0.12);
+    padding: 6px 18px;
+}
+.field-row .paper-field {
+    height: 72px;
+    flex: 1;
+    min-width: 0;
+}
+.reason-label {
+    position: absolute;
+    top: 565px;
+    left: 264px;
+    width: 135px;
+}
+.reason-field {
+    font-size: 32px;
+    position: absolute;
+    left: 260px;
+    top: 637px;
+    width: 648px;
+    height: 211px;
+    padding: 18px 25px;
+    resize: none;
+    line-height: 1.6;
+}
+.paper-field:focus {
+    outline: 2px solid rgba(105, 65, 39, 0.58);
+}
+.write-button, .tear-button {
+    width: 274px;
+    height: 73px;
+    top: 903px;
+}
+.write-button {
+    left: 281px;
+}
+.tear-button {
+    left: 602px;
+}
+/* ==========================================================
+04 右ページ：5件分を固定配置（背景の4本線と一致）
+========================================================== */
+.records {
+    position: absolute;
+    top: 158px;
+    left: 1023px;
+    width: 700px;
+    height: 930px;
+    pointer-events: none;
+    z-index: 5;
+}
+.record {
+    position: absolute;
+    width: 692px;
+    height: 147px;
+    overflow: hidden;
+    color: #2c1c13;
+    font-family: "ちはやフォント＋", "ちはやフォント+", "Yu Mincho", "Hiragino Mincho ProN", serif;
+}
+.record:nth-child(1) {
+    top: 30px;
+}
+.record:nth-child(2) {
+    top: 185px;
+}
+.record:nth-child(3) {
+    top: 350px;
+}
+.record:nth-child(4) {
+    top: 515px;
+}
+.record:nth-child(5) {
+    top: 680px;
+}
+.record-heading {
+    display: flex;
+    align-items: baseline;
+    gap: 60px;
+    height: 48px;
+    font-size: 35px;
+    line-height: 1.15;
+    white-space: nowrap;
+    font-weight: 600;
+}
+.record-name {
+    display: block;
+    min-width: 215px;
+    max-width: 375px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.record-date {
+    flex: 0 0 auto;
+    font-size: 33px;
+}
+.record-reason {
+    font-size: 24px;
+    font-weight: 600;
+    width: 650px;
+    max-width: 650px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+}
+
+/* ページ移動前：現在の文字を徐々に消す */
+.records.page-fade-out {
+    animation-name: page-fade-out;
+    animation-duration: 0.15s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes page-fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.records.page-fade {
+    animation-name: page-fade;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+@keyframes page-fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.record.glow .record-name, .record.glow .record-date, .record.glow .record-reason {
+    animation-name: writing-glow;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+@keyframes writing-glow {
+    0%, 100% {
+        color: #2c1c13;
+        text-shadow: none;
+    }
+    50% {
+        color: #a70000;
+        text-shadow: 0 0 5px #990014, 0 0 24px #c90028;
+    }
+}
+/* ==========================================================
+05 右ページの移動ボタン（左右同じサイズ）
+========================================================== */
+.previous-button, .next-button {
+    top: 975px;
+    width: 210px;
+    height: auto;
+}
+.previous-button {
+    left: 1050px;
+}
+.next-button {
+    left: 1510px;
+}
+.feedback {
+    position: absolute;
+    left: 325px;
+    top: 1000px;
+    width: 650px;
+    color: #7e261d;
+    font-size: 24px;
+    pointer-events: none;
+    z-index: 20;
+}
+/* ==========================================================
+06 破り捨てる：紙＋文字が一体で右下へ落ちる
+========================================================== */
+.tear-layer {
+    position: absolute;
+    z-index: 10;
+    top: 80px;
+    left: 945px;
+    width: 871px;
+    height: 1088px;
+    display: none;
+    pointer-events: none;
+}
+.tear-layer.visible {
+    display: block;
+}
+.tear-paper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.tear-records {
+    position: absolute;
+    top: 78px;
+    left: 78px;
+    width: 700px;
+    height: 930px;
+}
+.tear-layer.tearing {
+    transform-origin: left top;
+    animation-name: tear-fall;
+    animation-duration: 0.9s;
+    animation-timing-function: cubic-bezier(0.29, 0.55, 0.4, 1);
+    animation-fill-mode: both;
+}
+@keyframes tear-fall {
+    0% {
+        transform: translate(0,0) rotate(0deg);
+        opacity: 1;
+    }
+    16% {
+        transform: translate(19px,-10px) rotate(1deg);
+        opacity: 1;
+    }
+    33.333% {
+        transform: translate(64px,34px) rotate(7deg);
+        opacity: 1;
+    }
+    66% {
+        transform: translate(190px,285px) rotate(17deg);
+        opacity: .5;
+    }
+    100% {
+        transform: translate(330px,760px) rotate(29deg);
+        opacity: 0;
+    }
+}
+/* 通常時は無傷。破棄中だけ左端に3pxのギザギザを表示 */
+/* ==========================================================
+07 表紙切り替え：黒0.5秒 → 黒解除0.5秒
+========================================================== */
+.blackout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    background: #000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.blackout.active {
+    visibility: visible;
+    animation-name: blackout-transition;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+@keyframes blackout-transition {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}

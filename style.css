@@ -220,7 +220,7 @@ body {
 .record-heading {
     display: flex;
     align-items: baseline;
-    gap: 60px;
+    gap: 130px;
     height: 48px;
     font-size: 35px;
     line-height: 1.15;
@@ -231,8 +231,6 @@ body {
     display: block;
     min-width: 215px;
     max-width: 375px;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 .record-date {
     flex: 0 0 auto;

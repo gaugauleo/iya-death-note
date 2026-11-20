@@ -48,13 +48,13 @@
                 <!-- 右ページ：記録の表示。ここには紙画像を通常時は重ねない -->
                 <div class="records" id="records" aria-live="polite"></div>
 
-                <!-- 破棄するときだけ右ページの透過PNGと記録を一緒に動かす -->
+                <!-- 破棄するときは右ページの透過PNGと文字記録を一緒に動かす -->
                 <div class="tear-layer" id="tear-layer" aria-hidden="true">
                     <img src="assets/page-1.png" class="tear-paper" alt="">
                     <div class="tear-records" id="tear-records"></div>
                 </div>
 
-                <!-- ページ操作は破棄する紙の外側に固定 -->
+                <!-- ボタンは破棄する紙の外側に固定 -->
                 <button class="image-button previous-button" id="previous-button" type="button" aria-label="左へめくる">
                     <img src="assets/button-4.png" alt="">
                 </button>
@@ -64,7 +64,7 @@
                 <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
             </section>
 
-            <!-- 表紙から見開きへのブラックアウト：0.5秒×2 -->
+            <!-- 表紙から開いたあとへのブラックアウト -->
             <div class="blackout" id="blackout" aria-hidden="true"></div>
         </div>
     </main>
